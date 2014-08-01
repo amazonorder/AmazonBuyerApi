@@ -13,7 +13,7 @@ namespace MyAmazon_API
     {
         static void Main(string[] args)
         {
-            CookieAwareWebClient aw = AmazonCls.login("allansasha@gmail.com", "arnica200", null);
+            CookieAwareWebClient aw = AmazonCls.login("III", "LLL", null);
             Console.WriteLine(AmazonCls.GetOrderNo(aw));
             Console.ReadLine();
         }
@@ -33,19 +33,8 @@ namespace MyAmazon_API
             CookieAwareWebClient wc = new CookieAwareWebClient(ck);
             if (Proxy != null)
             { WebProxy wp = new WebProxy(Proxy); wc.Proxy = wp; }
-            //Navigate to the amazon payments https address
-            string web = wc.DownloadString("https://payments.amazon.com");
-            int int1 = web.IndexOf("https://amazon.com/ap/signin");
-            string lint = web.Substring(int1, 600);
-            string link = "";
-            for (int i = 0; i < lint.Length; i++)
-            {
-                if (lint[i] == '\"') break;
-                link += lint[i];
-            }
-            //Url decode the link
-            string linku = WebUtility.HtmlDecode(link);
-            string signInPage = wc.DownloadString(linku);
+            
+            string signInPage = wc.DownloadString("https://amazon.com/gp/sign-in.html");
             NameValueCollection nmv = new NameValueCollection();
             string act = "";
             bool firstTimex = true;
